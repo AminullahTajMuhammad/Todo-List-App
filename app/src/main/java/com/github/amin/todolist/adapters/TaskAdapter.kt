@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.amin.todolist.R
 import com.github.amin.todolist.listeners.ItemClickListener
 import com.github.amin.todolist.model.TaskModel
+import kotlin.concurrent.timerTask
 
 class TaskAdapter(var context: Context, var itemClick: ItemClickListener): RecyclerView.Adapter<TaskAdapter.Holder>() {
 
@@ -24,6 +25,12 @@ class TaskAdapter(var context: Context, var itemClick: ItemClickListener): Recyc
 
     fun addItem(model: TaskModel) {
         this.taskList.add(model)
+        this.notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int) {
+        taskList.removeAt(position)
+        this.notifyItemRemoved(position)
         this.notifyDataSetChanged()
     }
 
@@ -45,10 +52,6 @@ class TaskAdapter(var context: Context, var itemClick: ItemClickListener): Recyc
         val btn_delete = itemView.findViewById<AppCompatImageButton>(R.id.btn_delete)
         init {
             btn_delete.setOnClickListener {
-                taskList.remove(taskList[adapterPosition])
-                notifyItemRemoved(adapterPosition)
-            }
-            itemView.setOnClickListener { view ->
                 itemClick.itemClick(adapterPosition)
             }
         }

@@ -7,11 +7,17 @@ interface MainContract {
         fun setupViews()
         fun setupListeners()
         fun getTask(): TaskModel
-        fun addItems(model: TaskModel)
+        fun addTaskToDatabase(model: TaskModel)
+        fun deleteTaskFromDatabase(model: TaskModel)
+        fun getAllTasksFromDatabase(): List<TaskModel>
+        fun addTaskList(list: ArrayList<TaskModel>)
+        fun addTask(model: TaskModel)
     }
 
     interface Actions {
         fun initScreen()
         fun addTask()
+        fun addTaskToDatabase()
+        fun fetchAllTasks()
     }
 }

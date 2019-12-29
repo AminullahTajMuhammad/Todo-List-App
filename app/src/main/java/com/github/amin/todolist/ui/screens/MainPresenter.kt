@@ -16,9 +16,18 @@ class MainPresenter : MainContract.Actions {
     override fun initScreen() {
         _views?.setupViews()
         _views?.setupListeners()
+        fetchAllTasks()
     }
 
     override fun addTask() {
         _views?.addItems(_views?.getTask()!!)
+    }
+
+    override fun addTaskToDatabase() {
+        _views?.addTaskToDatabase(_views?.getTask()!!)
+    }
+
+    override fun fetchAllTasks() {
+        _views?.addListToRecycler(_views?.getAllTasks() as ArrayList)
     }
 }
